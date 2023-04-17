@@ -48,7 +48,7 @@ function Card(props) {
     <div>
       <img
         src={process.env.PUBLIC_URL + "/img/shoes" + (props.i + 1) + ".jpeg"}
-        alt="상품1"
+        alt={"상품" + (props.i + 1)}
         width="80%"
       />
       <h4>{props.shoes.title}</h4>
