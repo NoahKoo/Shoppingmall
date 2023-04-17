@@ -1,7 +1,11 @@
+import { useState } from "react";
 import "./App.css";
 import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
+import data from "./data.js";
 
 function App() {
+  let [shoes] = useState(data);
+
   return (
     <div className="App">
       <Navbar bg="dark" variant="dark">
@@ -17,35 +21,38 @@ function App() {
 
       <Container>
         <Row>
-          <Col sm>
-            <img
-              src={process.env.PUBLIC_URL + "/img/shoes1.jpeg"}
-              alt="상품1"
-              width="80%"
-            />
-            <h4>상품명</h4>
-            <p>상품설명</p>
+          {shoes.map((a, i) => {
+            return (
+              <Col sm>
+                <Card shoes={shoes[i]} i={i} />
+              </Col>
+            );
+          })}
+          {/* <Col sm>
+            <Detail shoes={shoes[0]} i={1} />
           </Col>
           <Col sm>
-            <img
-              src={process.env.PUBLIC_URL + "/img/shoes2.jpeg"}
-              alt="상품1"
-              width="80%"
-            />
-            <h4>상품명</h4>
-            <p>상품설명</p>
+            <Detail shoes={shoes[1]} i={2} />
           </Col>
           <Col sm>
-            <img
-              src={process.env.PUBLIC_URL + "/img/shoes3.jpeg"}
-              alt="상품1"
-              width="80%"
-            />
-            <h4>상품명</h4>
-            <p>상품설명</p>
-          </Col>
+            <Detail shoes={shoes[2]} i={3} />
+          </Col> */}
         </Row>
       </Container>
+    </div>
+  );
+}
+
+function Card(props) {
+  return (
+    <div>
+      <img
+        src={process.env.PUBLIC_URL + "/img/shoes" + (props.i + 1) + ".jpeg"}
+        alt="상품1"
+        width="80%"
+      />
+      <h4>{props.shoes.title}</h4>
+      <p>{props.shoes.price}</p>
     </div>
   );
 }
