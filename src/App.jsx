@@ -1,5 +1,5 @@
 import "./App.css";
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 
 function App() {
   return (
@@ -14,6 +14,38 @@ function App() {
         </Container>
       </Navbar>
       <div className="main-bg"></div>
+
+      <Container>
+        <Row>
+          <Col sm>
+            <img
+              src={process.env.PUBLIC_URL + "/img/shoes1.jpeg"}
+              alt="상품1"
+              width="80%"
+            />
+            <h4>상품명</h4>
+            <p>상품설명</p>
+          </Col>
+          <Col sm>
+            <img
+              src={process.env.PUBLIC_URL + "/img/shoes2.jpeg"}
+              alt="상품1"
+              width="80%"
+            />
+            <h4>상품명</h4>
+            <p>상품설명</p>
+          </Col>
+          <Col sm>
+            <img
+              src={process.env.PUBLIC_URL + "/img/shoes3.jpeg"}
+              alt="상품1"
+              width="80%"
+            />
+            <h4>상품명</h4>
+            <p>상품설명</p>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
