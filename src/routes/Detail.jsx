@@ -19,7 +19,7 @@ const Detail = (props) => {
         <div className="col-md-6">
           <h4 className="pt-5">{findId.title}</h4>
           <p>{findId.content}</p>
-          <p>{findId.price}원</p>
+          <p>{findId.price}won</p>
           <button className="btn btn-danger">주문하기</button>
         </div>
       </div>
