@@ -7,6 +7,7 @@ import Detail from "./routes/Detail";
 import About from "./routes/About";
 import Event from "./routes/Event";
 import axios, { all } from "axios";
+import Cart from "./routes/Cart";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -46,6 +47,13 @@ function App() {
               }}
             >
               Event
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/cart");
+              }}
+            >
+              Cart
             </Nav.Link>
           </Nav>
         </Container>
@@ -106,6 +114,8 @@ function App() {
         />
 
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
+
+        <Route path="/cart" element={<Cart />} />
 
         <Route path="/about" element={<About />}>
           <Route path="member" element={<div>멤버임</div>} />
