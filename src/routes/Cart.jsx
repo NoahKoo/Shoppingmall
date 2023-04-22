@@ -40,7 +40,14 @@ const Cart = () => {
                 <td>{state.cart[i].name}</td>
                 <td>{state.cart[i].count}</td>
                 <td>
-                  <button onClick={() => {}}>+</button>
+                  <button
+                    onClick={() => {
+                      // 해당 항목의 Id를 찾아 그 객체 요소의 수량을 1 증가
+                      dispatch(plusCount(state.cart[i].id));
+                    }}
+                  >
+                    +
+                  </button>
                 </td>
               </tr>
             );
