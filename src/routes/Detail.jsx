@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { addItem } from "../store";
+import { useDispatch } from "react-redux";
 
 const Detail = (props) => {
   let { id } = useParams();
-  let findId = props.shoes.find((x) => x.id == id);
+  let findId = props.shoes.find((x) => x.id === parseInt(id));
   let [count, setCount] = useState(0);
   let [tab, setTab] = useState(0);
   let [inputValue, setInputValue] = useState("");
-
   let [fade, setFade] = useState("");
+  let dispatch = useDispatch();
 
   useEffect(() => {
     setTimeout(() => {
@@ -53,7 +55,20 @@ const Detail = (props) => {
           <h4 className="pt-5">{findId.title}</h4>
           <p>{findId.content}</p>
           <p>{findId.price}won</p>
-          <button className="btn btn-danger">주문하기</button>
+          <button
+            className="btn btn-danger"
+            onClick={() => {
+              dispatch(
+                addItem({
+                  id: findId.id,
+                  name: findId.title,
+                  count: 0,
+                })
+              );
+            }}
+          >
+            주문하기
+          </button>
         </div>
       </div>
       <Nav variant="tabs" defaultActiveKey="link0">
