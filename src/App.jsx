@@ -7,6 +7,7 @@ import Detail from "./routes/Detail";
 import About from "./routes/About";
 import Event from "./routes/Event";
 import axios, { all } from "axios";
+import DetailId from "./routes/DetailId";
 
 function App() {
   let [shoes, setShoes] = useState(data);
@@ -72,7 +73,7 @@ function App() {
             </>
           }
         />
-        <Route path="/detail/" element={<Detail shoes={shoes} />} />
+
         <Route path="/detail/:id" element={<Detail shoes={shoes} />} />
 
         <Route path="/about" element={<About />}>
@@ -110,6 +111,8 @@ function App() {
               .catch(() => {
                 return <div>실패</div>;
               });
+          } else if (count >= 3) {
+            return null;
           }
         }}
       >
