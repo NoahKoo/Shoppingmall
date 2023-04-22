@@ -7,12 +7,10 @@ import Detail from "./routes/Detail";
 import About from "./routes/About";
 import Event from "./routes/Event";
 import axios, { all } from "axios";
-import DetailId from "./routes/DetailId";
 
 function App() {
   let [shoes, setShoes] = useState(data);
   let [count, setCount] = useState(0);
-  let [btn, setBtn] = useState(true);
   let navigate = useNavigate();
 
   return (
@@ -70,6 +68,39 @@ function App() {
                   })}
                 </Row>
               </Container>
+              {
+                <button
+                  onClick={() => {
+                    setCount(count + 1);
+                    console.log(count);
+                    if (count == 1) {
+                      axios
+                        .get("https://codingapple1.github.io/shop/data2.json")
+                        .then((result) => {
+                          let copy = [...shoes, ...result.data];
+                          setShoes(copy);
+                        })
+                        .catch(() => {
+                          return <div>실패</div>;
+                        });
+                    } else if (count == 2) {
+                      axios
+                        .get("https://codingapple1.github.io/shop/data3.json")
+                        .then((result) => {
+                          let copy = [...shoes, ...result.data];
+                          setShoes(copy);
+                        })
+                        .catch(() => {
+                          return <div>실패</div>;
+                        });
+                    } else if (count >= 3) {
+                      return null;
+                    }
+                  }}
+                >
+                  버튼
+                </button>
+              }
             </>
           }
         />
@@ -87,37 +118,6 @@ function App() {
 
         <Route path="*" element={<div>없는 페이지입니다.</div>} />
       </Routes>
-      <button
-        onClick={() => {
-          setCount(count + 1);
-          console.log(count);
-          if (count == 1) {
-            axios
-              .get("https://codingapple1.github.io/shop/data2.json")
-              .then((result) => {
-                let copy = [...shoes, ...result.data];
-                setShoes(copy);
-              })
-              .catch(() => {
-                return <div>실패</div>;
-              });
-          } else if (count == 2) {
-            axios
-              .get("https://codingapple1.github.io/shop/data3.json")
-              .then((result) => {
-                let copy = [...shoes, ...result.data];
-                setShoes(copy);
-              })
-              .catch(() => {
-                return <div>실패</div>;
-              });
-          } else if (count >= 3) {
-            return null;
-          }
-        }}
-      >
-        버튼
-      </button>
     </div>
   );
 }
