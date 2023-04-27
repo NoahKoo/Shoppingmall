@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import data from "./data.js";
@@ -10,6 +10,10 @@ import axios, { all } from "axios";
 import Cart from "./routes/Cart";
 
 function App() {
+  useEffect(() => {
+    localStorage.setItem("watched", JSON.stringify([]));
+  }, []);
+
   let [shoes, setShoes] = useState(data);
   let [count, setCount] = useState(0);
   let navigate = useNavigate();
@@ -26,13 +30,6 @@ function App() {
               }}
             >
               Home
-            </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate("/detail");
-              }}
-            >
-              Detail
             </Nav.Link>
             <Nav.Link
               onClick={() => {
@@ -70,7 +67,7 @@ function App() {
                   {shoes.map((a, i) => {
                     return (
                       <Col sm>
-                        <Card shoes={shoes[i]} i={i} />
+                        <Card shoes={shoes[i]} i={i} navigate={navigate} />
                       </Col>
                     );
                   })}
@@ -134,7 +131,11 @@ function App() {
 
 function Card(props) {
   return (
-    <div>
+    <div
+      onClick={() => {
+        props.navigate("/detail/" + props.i);
+      }}
+    >
       <img
         src={process.env.PUBLIC_URL + "/img/shoes" + (props.i + 1) + ".jpeg"}
         alt={"상품" + (props.i + 1)}
