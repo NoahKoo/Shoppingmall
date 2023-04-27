@@ -14,6 +14,15 @@ const Detail = (props) => {
   let dispatch = useDispatch();
 
   useEffect(() => {
+    let pullOut = localStorage.getItem("watched");
+    pullOut = JSON.parse(pullOut);
+    pullOut.push(findId.id);
+    pullOut = new Set(pullOut);
+    pullOut = Array.from(pullOut);
+    localStorage.setItem("watched", JSON.stringify(pullOut));
+  }, []);
+
+  useEffect(() => {
     setTimeout(() => {
       setFade("end");
     }, 100);
